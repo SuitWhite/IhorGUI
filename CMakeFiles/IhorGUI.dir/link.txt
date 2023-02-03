@@ -1,0 +1,2 @@
+/usr/bin/ar qc libIhorGUI.a  CMakeFiles/IhorGUI.dir/src/IhorGUI.cpp.o
+/usr/bin/ranlib libIhorGUI.a

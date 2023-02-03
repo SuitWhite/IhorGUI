@@ -1,0 +1,33 @@
+@PACKAGE_INIT@
+
+macro(import_targets type)
+    if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/ihorgui-${type}-targets.cmake")
+        set(${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE "IhorGUI ${type} libraries were requested but not found")
+        set(${CMAKE_FIND_PACKAGE_NAME}_FOUND OFF)
+        return()
+    endif()
+
+    include("${CMAKE_CURRENT_LIST_DIR}/ihorgui-${type}-targets.cmake")
+endmacro()
+
+if(NOT TARGET IhorGUI::IhorGUI)
+    set(type "")
+
+    if(DEFINED IHORGUI_SHARED_LIBS)
+        if(IHORGUI_SHARED_LIBS)
+            set(type "shared")
+        else()
+            set(type "static")
+        endif()
+    elseif(BUILD_SHARED_LIBS AND EXISTS "${CMAKE_CURRENT_LIST_DIR}/ihorgui-shared-targets.cmake")
+        set(type "shared")
+    elseif(EXISTS "${CMAKE_CURRENT_LIST_DIR}/ihorgui-static-targets.cmake")
+        set(type "static")
+    else()
+        set(type "shared")
+    endif()
+
+    import_targets(${type})
+    check_required_components(IhorGUI)
+    message("-- Found ${type} IhorGUI (version ${${CMAKE_FIND_PACKAGE_NAME}_VERSION})")
+endif()

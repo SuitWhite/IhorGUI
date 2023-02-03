@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ihor/Coursework/IhorGUI/src/IhorGUI.cpp
+IhorGUI/IhorGUI.h
+/home/ihor/Coursework/IhorGUI/src/IhorGUI/IhorGUI.h
+
+include/IhorGUI/IhorGUI.h
+
