@@ -19,12 +19,8 @@ add_library(IhorGUI::IhorGUI ALIAS IhorGUI)
 # IhorGUI sources
 
 include(GenerateExportHeader)
-# set(export_file_name "export_static.h")
-
-# generate_export_header(IhorGUI EXPORT_FILE_NAME include/IhorGUI/${export_file_name})
 
 set(sources
-    # include/IhorGUI/export.h
     include/IhorGUI/IhorGUI.h
     src/IhorGUI.cpp)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${sources})
@@ -60,9 +56,6 @@ if(IHORGUI_INSTALL AND NOT CMAKE_SKIP_INSTALL_RULES)
     install(DIRECTORY include/
         TYPE INCLUDE
         COMPONENT IhorGUI-dev)
-    # install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/IhorGUI/${export_file_name}"
-    #     COMPONENT IhorGUI-dev
-    #     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/IhorGUI")
 
     set(targets_file "ihorgui-shared-targets.cmake")
 
