@@ -11,8 +11,8 @@ class Window
 {
 private:
     Vector2 sizeMainWindow;
-    Vector2 max_size;
-    Vector2 min_size;
+    Vector2 maxSize;
+    Vector2 minSize;
 
     LayoutManager layoutManager;
     EventManager eventManager;
@@ -32,5 +32,7 @@ public:
 
     void setMinSize(const Vector2 &size);
 
-    void drawLoop();
+    bool isClosed();
+
+    void draw();
 };

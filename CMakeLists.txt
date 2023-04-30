@@ -22,7 +22,11 @@ include(GenerateExportHeader)
 
 set(sources
     include/IhorGUI/IhorGUI.h
-    src/IhorGUI.cpp)
+    src/IhorGUI.cpp
+    src/common.cpp
+    src/layoutmanager.cpp
+    src/widget.cpp
+    src/window.cpp)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${sources})
 
 # IhorGUI dependencies

@@ -5,7 +5,8 @@
 
 class LayoutManager{
 private:
-    std::vector<Widget> components;
+    std::vector<Widget*> components;
 public:
     void addComponent(Widget* component);
+    void drawComponents();
 };
