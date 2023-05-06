@@ -1,10 +1,16 @@
 #include "IhorGUI/window.h"
 #include <iostream>
 #include <GL/glew.h>
+#include <GL/glut.h>
 #include <GLFW/glfw3.h>
+#include "IhorGUI/widget.h"
 
+Window::Window(Vector2 size, const char *title): minSize(200, 200), maxSize(800, 600), sizeMainWindow(size){
+    int argc = 1;
+    char **argv = new char*[argc];
+    argv[0] = "bruh";
+    glutInit(&argc, argv);
 
-Window::Window(Vector2 size, const char *title): minSize(200, 200), maxSize(800, 600){
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
     }
@@ -24,6 +30,14 @@ Window::Window(Vector2 size, const char *title): minSize(200, 200), maxSize(800,
         std::cerr << "Failed to initialize GLEW" << std::endl;
         glfwTerminate();
     }  
+
+    // Вмикаємо буфер глибини
+    glEnable(GL_DEPTH_TEST);
+    // Вмикаємо блендінг
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // Встановлюємо кольор фону
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
 bool Window::isClosed(){
@@ -31,13 +45,15 @@ bool Window::isClosed(){
 }
 
 void Window::draw(){
-    // Render here
-    glClear(GL_COLOR_BUFFER_BIT);
+    // Очищуємо буфери кольору і глибини
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Swap front and back buffers
+    layoutManager.drawComponents();
+
+    // Обмінюємо буфери вікна
     glfwSwapBuffers(window);
 
-    // Poll for and process events
+    // Обробляємо події вводу-виводу
     glfwPollEvents();
 }
 
@@ -47,8 +63,13 @@ Window::~Window(){
 }
 
 void Window::addChild(Widget *widget){
+    widget->parentWindow = this;
     layoutManager.addComponent(widget);
 }
+
+const Vector2 Window::getSize(){
+    return sizeMainWindow;
+};
 
 void Window::setTitle(const std::string &title){
     glfwSetWindowTitle(window, title.c_str());

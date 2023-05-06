@@ -1,6 +1,11 @@
 #pragma once
 
+class Window;
+
 class Widget{
+protected:
+    Window* parentWindow;
 public:
-    void draw();
+    virtual void draw();
+    friend class Window;
 };

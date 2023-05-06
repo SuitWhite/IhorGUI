@@ -2,10 +2,11 @@
 #include "common.h"
 #include "layoutmanager.h"
 #include "eventmanager.h"
-#include "widget.h"
 #include <string>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+class Widget;
 
 class Window
 {
@@ -19,8 +20,8 @@ private:
 
     std::string titleMainWindow;
 
-    GLFWwindow* window;
 public:
+    GLFWwindow* window;
     Window(Vector2 size, const char *title);
     ~Window();
 
@@ -31,6 +32,8 @@ public:
     void setMaxSize(const Vector2 &size);
 
     void setMinSize(const Vector2 &size);
+
+    const Vector2 getSize();
 
     bool isClosed();
 

@@ -26,6 +26,7 @@ set(sources
     src/common.cpp
     src/layoutmanager.cpp
     src/widget.cpp
+    src/button.cpp
     src/window.cpp)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${sources})
 

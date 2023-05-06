@@ -1,7 +1,8 @@
 #pragma once
 #include "common.h"
-#include "widget.h"
 #include <vector>
+
+class Widget;
 
 class LayoutManager{
 private:
