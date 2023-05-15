@@ -34,6 +34,7 @@ public:
     virtual void draw();
     bool isInside(float mouseX, float mouseY);
     void press();
-    void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
-    void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+    void setOnClick(std::function<void()> function);
+    virtual void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
+    virtual void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
 };

@@ -1,5 +1,6 @@
 #include "IhorGUI/button.h"
 #include <functional>
+#include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <GL/glut.h>
@@ -25,6 +26,13 @@ void empty(){
 
   // Метод для отрисовки кнопки
   void Button::draw() {
+    if (buttonState == NORMAL){
+        color[4] = 0.8;
+    } else if (buttonState == HOVER){
+      color[4] = 0.3;
+    } else if (buttonState == PRESSED){
+      color[4] = 1;
+    }
     // Встановлюємо матрицю проекції у режим ортогональної проекції
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -43,7 +51,7 @@ void empty(){
     }
 
     // Малюємо прямокутник з вибраним кольором
-    glColor3f(color[0], color[1], color[2]);
+    glColor4f(color[0], color[1], color[2], color[4]);
     glBegin(GL_QUADS);
         glVertex2f(x, y);
         glVertex2f(x + width, y);
@@ -64,11 +72,18 @@ void empty(){
     }
   }
 
+    void Button::setOnClick(std::function<void()> function){
+        this->onClick = function;
+    }
+
 // Функція для обробки подій курсора
 void Button::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos) {
+    int windowWidth, windowHeight;
+    glfwGetWindowSize(window, &windowWidth, &windowHeight);
+    // now you can use width and height variables
     // Переводимо координати курсора у систему координат OpenGL
     xpos = xpos;
-    ypos = height - ypos;
+    ypos = windowHeight - ypos;
 
     // Перевіряємо чи курсор знаходиться над кнопкою
     if (isInside(xpos, ypos)) {
@@ -86,11 +101,15 @@ void Button::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos
 
 // Функція для обробки подій миші
 void Button::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+    int windowWidth, windowHeight;
+    glfwGetWindowSize(window, &windowWidth, &windowHeight);
+    // now you can use width and height variables
+
     // Переводимо координати курсора у систему координат OpenGL
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
     xpos = xpos;
-    ypos = height - ypos;
+    ypos = windowHeight - ypos;
 
     // Перевіряємо чи курсор знаходиться над кнопкою і чи натиснута ліва кнопка
         if (isInside(xpos, ypos) && button == GLFW_MOUSE_BUTTON_LEFT) {
@@ -100,7 +119,7 @@ void Button::mouseButtonCallback(GLFWwindow* window, int button, int action, int
         } else if (action == GLFW_RELEASE) {
             buttonState = HOVER;
             // Тут можна додати дію, яку виконує кнопка при натисканні
-            //std::cout << "Button clicked!\n";
+            press();
         }
     }
 }

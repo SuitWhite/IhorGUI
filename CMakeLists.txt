@@ -24,6 +24,7 @@ set(sources
     include/IhorGUI/IhorGUI.h
     src/IhorGUI.cpp
     src/common.cpp
+    src/eventmanager.cpp
     src/layoutmanager.cpp
     src/widget.cpp
     src/button.cpp

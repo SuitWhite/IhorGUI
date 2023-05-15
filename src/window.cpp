@@ -1,5 +1,6 @@
 #include "IhorGUI/window.h"
 #include <iostream>
+#include <functional>
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <GLFW/glfw3.h>
@@ -38,6 +39,8 @@ Window::Window(Vector2 size, const char *title): minSize(200, 200), maxSize(800,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // Встановлюємо кольор фону
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+    glfwSetWindowUserPointer(window, &eventManager);
 }
 
 bool Window::isClosed(){
@@ -64,7 +67,14 @@ Window::~Window(){
 
 void Window::addChild(Widget *widget){
     widget->parentWindow = this;
+    eventManager.addComponent(widget);
     layoutManager.addComponent(widget);
+
+    glfwSetCursorPosCallback(window, NULL);
+    glfwSetCursorPosCallback(window, eventManager.cursorposfun);
+
+    glfwSetMouseButtonCallback(window, NULL);
+    glfwSetMouseButtonCallback(window, eventManager.mousebuttonfun);
 }
 
 const Vector2 Window::getSize(){
