@@ -21,6 +21,10 @@ void EventManager::addComponent(Widget *widget){
         static_cast<EventManager*>(glfwGetWindowUserPointer(w))->mouseButtonCallbacks( w, a, b, c );
     };
 
+    this->keyfun = [](GLFWwindow* w, int a, int b , int c, int d)
+    {
+        static_cast<EventManager*>(glfwGetWindowUserPointer(w))->keyCallbacks( w, a, b, c, d );
+    };
 }
 
 void EventManager::cursorPositionCallbacks(GLFWwindow* window, double xpos, double ypos){
@@ -32,5 +36,11 @@ void EventManager::cursorPositionCallbacks(GLFWwindow* window, double xpos, doub
 void EventManager::mouseButtonCallbacks(GLFWwindow* window, int button, int action, int mods){
     for (const auto &elem: components){
         elem->mouseButtonCallback(window, button, action, mods);
+    }
+}
+
+void EventManager::keyCallbacks(GLFWwindow *window, int key, int scancode, int action, int mods){
+    for (const auto &elem: components){
+        elem->keyCallback(window, key, scancode, action, mods);
     }
 }

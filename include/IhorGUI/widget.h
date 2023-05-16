@@ -13,4 +13,5 @@ public:
     friend class Window;
     virtual void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
     virtual void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+    virtual void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
 };

@@ -75,6 +75,9 @@ void Window::addChild(Widget *widget){
 
     glfwSetMouseButtonCallback(window, NULL);
     glfwSetMouseButtonCallback(window, eventManager.mousebuttonfun);
+
+    glfwSetKeyCallback(window, NULL);
+    glfwSetKeyCallback(window, eventManager.keyfun);
 }
 
 const Vector2 Window::getSize(){
