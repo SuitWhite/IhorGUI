@@ -18,15 +18,18 @@ class TextBox: public Widget{
   // Ширина і висота текстового поля
   float width;
   float height;
-  // Колір тексту в формате RGBA
+
   float color[4];
-  // Текст на кнопке
+
   std::string text;
+
+  std::string placeholderText;
 
   TextBoxState textBoxState;
 
 public:
     TextBox(float x, float y, float width, float height, std::string text="");
+    void setPlaceholder(std::string str);
     virtual void draw();
     bool isInside(float mouseX, float mouseY);
 
