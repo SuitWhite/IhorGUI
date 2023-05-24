@@ -22,8 +22,24 @@ include(GenerateExportHeader)
 
 set(sources
     include/IhorGUI/IhorGUI.h
-    src/IhorGUI.cpp)
+    src/IhorGUI.cpp
+    src/common.cpp
+    src/eventmanager.cpp
+    src/layoutmanager.cpp
+    src/widget.cpp
+    src/button.cpp
+    src/textbox.cpp
+    src/window.cpp)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${sources})
+
+# IhorGUI dependencies
+
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+find_package(GLEW REQUIRED)
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS})
+
+target_link_libraries(IhorGUI ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${GLEW_LIBRARY})
 
 # IhorGUI target
 
