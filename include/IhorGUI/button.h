@@ -22,6 +22,7 @@ class Button: public Widget{
   float height;
   // Цвет кнопки в формате RGBA
   float color[4];
+  float color_of_text[4];
   // Текст на кнопке
   std::string text;
   // Функция, которая вызывается при нажатии на кнопку

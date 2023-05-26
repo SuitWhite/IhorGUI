@@ -47,16 +47,20 @@
 
     double line_width = symbol_width / 2.;
     int lines = 1;
+    int total_height_of_text = symbol_height;
     for (char c : text) {
         line_width += symbol_width;
 
-        if (line_width >= width - symbol_width/2.){
+        if (line_width >= width - symbol_width/2. || c == '\n'){
             lines += 1;
+
+            total_height_of_text += symbol_height;
             line_width = symbol_width/2. + symbol_width;
             glRasterPos2f(x + symbol_width/2, y + height - symbol_height*lines);
         }
 
-        glutBitmapCharacter(GLUT_BITMAP_8_BY_13, c);
+        if (total_height_of_text <= height)
+            glutBitmapCharacter(GLUT_BITMAP_8_BY_13, c);
 
     }
 
@@ -127,6 +131,10 @@ void TextBox::setPlaceholder(std::string str){
     placeholderText = str;
 };
 
+std::string TextBox::getText(){
+    return text;
+}
+
 void TextBox::keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods){
     
     if (textBoxState == FOCUSED && glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && key == GLFW_KEY_V && action == GLFW_RELEASE){
@@ -147,6 +155,12 @@ void TextBox::keyCallback(GLFWwindow *window, int key, int scancode, int action,
     if (action == GLFW_RELEASE && textBoxState == FOCUSED ){
         switch (key)
         {
+        case GLFW_KEY_SPACE:
+            text += " ";
+            break;
+        case GLFW_KEY_TAB:
+            text += "   ";
+            break;
         case GLFW_KEY_0:
             text += "0";
             break;

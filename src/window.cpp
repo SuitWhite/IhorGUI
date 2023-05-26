@@ -9,8 +9,10 @@
 Window::Window(Vector2 size, const char *title): minSize(200, 200), maxSize(800, 600), sizeMainWindow(size){
     int argc = 1;
     char **argv = new char*[argc];
-    argv[0] = "bruh";
+    argv[0] = "";
     glutInit(&argc, argv);
+
+    this->color[0] = 1.f; this->color[1] = 1.f; this->color[2] = 1.f; this->color[3] = 1.f;
 
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
@@ -38,7 +40,7 @@ Window::Window(Vector2 size, const char *title): minSize(200, 200), maxSize(800,
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // Встановлюємо кольор фону
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(color[0], color[1], color[2], color[3]);
 
     glfwSetWindowUserPointer(window, &eventManager);
 }
@@ -96,4 +98,17 @@ void Window::setMinSize(const Vector2 &size){
 void Window::setMaxSize(const Vector2 &size){
     maxSize = size;
     glfwSetWindowSizeLimits(window, minSize.x, minSize.y, maxSize.x, maxSize.y); 
+}
+
+void Window::setColor(float color[4]){
+    this->color[0] = color[0];
+    this->color[1] = color[1];
+    this->color[2] = color[2];
+    this->color[3] = color[3];
+
+    glClearColor(color[0], color[1], color[2], color[3]);   
+}
+
+void Window::close(){
+    glfwSetWindowShouldClose(window, GLFW_FALSE);
 }

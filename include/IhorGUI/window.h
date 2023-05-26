@@ -18,6 +18,8 @@ private:
     LayoutManager layoutManager;
     EventManager eventManager;
 
+    float color[4];
+
     std::string titleMainWindow;
 
 public:
@@ -26,6 +28,8 @@ public:
     ~Window();
 
     void addChild(Widget *widget);
+
+    void setColor(float color[4]);
 
     void setTitle(const std::string &title);
 
@@ -38,4 +42,6 @@ public:
     bool isClosed();
 
     void draw();
+
+    void close();
 };

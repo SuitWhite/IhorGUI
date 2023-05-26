@@ -19,6 +19,7 @@ void empty(){
     for (int i = 0; i < 4; i++) {
       this->color[i] = color[i];
     }
+    color_of_text[0] = 1.f; color_of_text[1] = 1.f; color_of_text[2] = 1.f; color_of_text[3] = 1.f;
     this->text = text;
     this->buttonState = NORMAL;
     this->onClick = onClick;
@@ -42,9 +43,8 @@ void empty(){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    std::string text = "Bruh";
-    glColor4f(0.3f, 0.2f, 0.8f, 1.0f);
-    // Рисуем текст на кнопке с помощью библиотеки GLUT
+    glColor4f(color_of_text[0], color_of_text[1], color_of_text[2], color_of_text[3]);
+    // Малюємо текст через бібліотеку GLUT
     glRasterPos2f(x + width/2 - text.length()*5.5, y + height / 2 - 4.5f);
     for (char c : text) {
       glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, c);
