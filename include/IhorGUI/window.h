@@ -8,12 +8,17 @@
 
 class Widget;
 
+static bool glut_initialized = false;
+static bool glfw_initialized = false;
+
 class Window
 {
 private:
     Vector2 sizeMainWindow;
     Vector2 maxSize;
     Vector2 minSize;
+
+    
 
     LayoutManager layoutManager;
     EventManager eventManager;
@@ -37,6 +42,8 @@ public:
 
     void setMinSize(const Vector2 &size);
 
+    void setSize(const Vector2 &size);
+
     const Vector2 getSize();
 
     bool isClosed();
@@ -44,4 +51,6 @@ public:
     void draw();
 
     void close();
+
+    void clear();
 };

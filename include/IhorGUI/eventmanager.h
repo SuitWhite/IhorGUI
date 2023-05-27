@@ -15,6 +15,7 @@ public:
     void cursorPositionCallbacks(GLFWwindow* window, double xpos, double ypos);
     void mouseButtonCallbacks(GLFWwindow* window, int button, int action, int mods);
     void keyCallbacks(GLFWwindow *window, int key, int scancode, int action, int mods);
+    void clearComponents();
 
     GLFWcursorposfun cursorposfun;
     GLFWmousebuttonfun mousebuttonfun;

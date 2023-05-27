@@ -10,4 +10,5 @@ private:
 public:
     void addComponent(Widget* component);
     void drawComponents();
+    void clearComponents();
 };

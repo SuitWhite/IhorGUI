@@ -10,3 +10,7 @@ void LayoutManager::drawComponents(){
         elem->draw();
     }
 }
+
+void LayoutManager::clearComponents(){
+    components.clear();
+}

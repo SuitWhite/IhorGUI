@@ -10,13 +10,21 @@ Window::Window(Vector2 size, const char *title): minSize(200, 200), maxSize(800,
     int argc = 1;
     char **argv = new char*[argc];
     argv[0] = "";
+
+    if (!glut_initialized)
     glutInit(&argc, argv);
+
+    glut_initialized = true;
 
     this->color[0] = 1.f; this->color[1] = 1.f; this->color[2] = 1.f; this->color[3] = 1.f;
 
-    if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
+    if (!glfw_initialized){
+        if (!glfwInit()) {
+            std::cerr << "Failed to initialize GLFW" << std::endl;
+        }
     }
+
+    glfw_initialized = true;
 
     // Create a windowed mode window and its OpenGL context
     window = glfwCreateWindow(size.x, size.y, title, NULL, NULL);
@@ -111,4 +119,13 @@ void Window::setColor(float color[4]){
 
 void Window::close(){
     glfwSetWindowShouldClose(window, GLFW_FALSE);
+}
+
+void Window::setSize(const Vector2 &size){
+    glfwSetWindowSize(window, size.x, size.y);
+}
+
+void Window::clear(){
+    layoutManager.clearComponents();
+    eventManager.clearComponents();
 }

@@ -44,3 +44,7 @@ void EventManager::keyCallbacks(GLFWwindow *window, int key, int scancode, int a
         elem->keyCallback(window, key, scancode, action, mods);
     }
 }
+
+void EventManager::clearComponents(){
+    components.clear();
+}
