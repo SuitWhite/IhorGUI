@@ -26,28 +26,22 @@ Window::Window(Vector2 size, const char *title): minSize(200, 200), maxSize(800,
 
     glfw_initialized = true;
 
-    // Create a windowed mode window and its OpenGL context
     window = glfwCreateWindow(size.x, size.y, title, NULL, NULL);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
     }
 
-    // Make the window's context current
     glfwMakeContextCurrent(window);
 
-    // Initialize GLEW
     if (glewInit() != GLEW_OK) {
         std::cerr << "Failed to initialize GLEW" << std::endl;
         glfwTerminate();
     }  
 
-    // Вмикаємо буфер глибини
     glEnable(GL_DEPTH_TEST);
-    // Вмикаємо блендінг
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    // Встановлюємо кольор фону
     glClearColor(color[0], color[1], color[2], color[3]);
 
     glfwSetWindowUserPointer(window, &eventManager);
@@ -58,15 +52,12 @@ bool Window::isClosed(){
 }
 
 void Window::draw(){
-    // Очищуємо буфери кольору і глибини
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     layoutManager.drawComponents();
 
-    // Обмінюємо буфери вікна
     glfwSwapBuffers(window);
 
-    // Обробляємо події вводу-виводу
     glfwPollEvents();
 }
 

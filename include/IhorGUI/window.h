@@ -18,15 +18,12 @@ private:
     Vector2 maxSize;
     Vector2 minSize;
 
-    
-
     LayoutManager layoutManager;
     EventManager eventManager;
 
     float color[4];
 
     std::string titleMainWindow;
-
 public:
     GLFWwindow* window;
     Window(Vector2 size, const char *title);

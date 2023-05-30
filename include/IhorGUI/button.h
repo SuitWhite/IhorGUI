@@ -12,20 +12,18 @@ enum ButtonState {
     PRESSED
 };
 
-// Класс кнопки на основе OpenGL
 class Button: public Widget{
-  // Координаты левого нижнего угла кнопки
   float x;
   float y;
-  // Ширина и высота кнопки
+
   float width;
   float height;
-  // Цвет кнопки в формате RGBA
+
   float color[4];
   float color_of_text[4];
-  // Текст на кнопке
+
   std::string text;
-  // Функция, которая вызывается при нажатии на кнопку
+  
   std::function<void()> onClick;
 
   ButtonState buttonState;

@@ -6,10 +6,8 @@
 #include "widget.h"
 
 class Label: public Widget{
-  // Координати лівого нижнього кута 
   float x;
   float y;
-  // Ширина і висота текстового поля
   float width;
   float height;
 

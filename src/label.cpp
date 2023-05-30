@@ -22,14 +22,14 @@ Label::Label(float x, float y, float width, float height, std::string text) {
     this->symbol_height = 13;
   }
 
-  // Метод для отрисовки кнопки
+
   void Label::draw() {
-    // Встановлюємо матрицю проекції у режим ортогональної проекції
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0, parentWindow->getSize().x, 0, parentWindow->getSize().y, -1, 1);
 
-    // Встановлюємо матрицю моделі-виду у одиничну матрицю
+
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
