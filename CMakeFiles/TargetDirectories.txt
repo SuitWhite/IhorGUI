@@ -1,7 +1,0 @@
-/home/ihor/Coursework/IhorGUI/CMakeFiles/install/strip.dir
-/home/ihor/Coursework/IhorGUI/CMakeFiles/install/local.dir
-/home/ihor/Coursework/IhorGUI/CMakeFiles/install.dir
-/home/ihor/Coursework/IhorGUI/CMakeFiles/list_install_components.dir
-/home/ihor/Coursework/IhorGUI/CMakeFiles/rebuild_cache.dir
-/home/ihor/Coursework/IhorGUI/CMakeFiles/edit_cache.dir
-/home/ihor/Coursework/IhorGUI/CMakeFiles/IhorGUI.dir
